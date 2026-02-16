@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+Este guia orienta o preenchimento do Mapa de Autopercepção Corporal, auxiliando-o a transformar sensações internas em registros visuais claros para o apoio ao seu processo terapêutico.
+O Mapa não é um teste de desenho ou de precisão anatômica. O objetivo é criar uma ponte visual entre o que você sente internamente e como você enxerga sua imagem externa. Ele serve para identificarmos onde a percepção está distorcida por emoções ou pressões sociais e onde reside o seu desejo real de bem-estar.
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">

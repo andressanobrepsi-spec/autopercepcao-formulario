@@ -1,556 +1,596 @@
-Este guia orienta o preenchimento do Mapa de Autopercepção Corporal, auxiliando-o a transformar sensações internas em registros visuais claros para o apoio ao seu processo terapêutico.
-O Mapa não é um teste de desenho ou de precisão anatômica. O objetivo é criar uma ponte visual entre o que você sente internamente e como você enxerga sua imagem externa. Ele serve para identificarmos onde a percepção está distorcida por emoções ou pressões sociais e onde reside o seu desejo real de bem-estar.
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <!-- Garante que o navegador mobile renderize como App e não dê zoom indesejado -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Mapa de Autopercepção Corporal - Andrêssa Nobre</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jornada de Autopercepção Corporal | Andrêssa Nobre</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Tailwind Config for Custom Palette -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7a8f82',
+                        secondary: '#d8c3ae',
+                        accent: '#A0B179',
+                        bgPage: '#fdfdfd',
+                        textMain: '#2d3748',
+                        textMuted: '#718096',
+                        alert: '#e53e3e'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        :root {
-            --primary-dark: #7a8f82;
-            --secondary: #d8c3ae;
-            --bg-page: #fdfdfd;
-            --bg-card: #ffffff;
-            --border: #e2e8f0;
-            --text-main: #2d3748;
-            --text-muted: #718096;
-            --accent-red: #e53e3e;
-            --whatsapp-color: #25d366;
-            --font-serif: 'Cormorant Garamond', serif;
-            --font-sans: 'Montserrat', sans-serif;
-            --btn-female: #EFE7DA;
-            --btn-male: #E1DACA;
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Montserrat:wght@400;600;700&display=swap');
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        /* Custom Styles & Utilities */
         body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-page);
-            color: var(--text-main);
-            line-height: 1.4;
-            overflow-x: hidden;
-            width: 100%;
+            background-image: url('https://i.ibb.co/XfXGk6h/Captura-de-tela-2025-07-21-222243.png');
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-attachment: fixed;
+            background-size: 600px;
+            background-blend-mode: soft-light;
+            background-color: #fdfdfd;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(216, 195, 174, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
         }
 
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            padding: 15px;
-            min-height: 100vh;
-        }
-
-        header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .professional-header {
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.4rem;
-            width: 100%;
-            border-bottom: 1px solid var(--secondary);
-        }
-
-        .professional-name {
-            font-family: var(--font-serif);
-            font-size: clamp(1.5rem, 6vw, 2.2rem);
-            color: var(--primary-dark);
+        .tab-active {
+            border-bottom: 3px solid #7a8f82;
+            color: #7a8f82;
             font-weight: 600;
         }
 
-        .professional-crp {
-            font-size: 0.7rem;
-            color: var(--secondary);
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+        .tab-inactive {
+            border-bottom: 3px solid transparent;
+            color: #718096;
         }
 
-        .onboarding-guide {
-            background: #f8faf9;
-            border-left: 4px solid var(--primary-dark);
-            padding: 15px;
-            margin-bottom: 1.5rem;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.85rem;
-            text-align: left;
+        .tab-inactive:hover {
+            color: #7a8f82;
         }
 
-        .onboarding-guide h2 {
-            font-size: 0.9rem;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .onboarding-steps {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .onboarding-steps li {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-
-        .step-num {
-            background: var(--primary-dark);
-            color: white;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .patient-info-header {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            padding: 15px;
-            background: #fbf9f7;
-            border-radius: 12px;
-            border: 1px solid var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .patient-info-header {
-                display: grid;
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-
-        .input-field label {
-            display: block;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .input-field input {
-            border: none;
-            border-bottom: 2px solid var(--secondary);
-            background: transparent;
-            padding: 8px 0;
-            font-size: 1rem;
-            width: 100%;
-            outline: none;
-            color: var(--text-main);
-            border-radius: 0;
-        }
-
-        h1 {
-            font-size: 1.1rem;
-            color: var(--primary-dark);
-            margin-top: 1rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            border-bottom: 2px solid var(--secondary);
-            width: 100%;
-            padding-bottom: 0.6rem;
-            text-align: center;
-        }
-
-        .workspace {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 1.5rem;
-        }
-
-        @media (min-width: 1024px) {
-            .workspace {
-                display: grid;
-                grid-template-columns: 1fr 340px 1fr;
-                align-items: start;
-            }
-        }
-
-        .column-header {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 0.6rem;
-            color: white;
-            background: var(--primary-dark);
-            padding: 0.8rem;
-            border-radius: 8px;
-        }
-
-        .column-sub-instruction {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 1.2rem;
-            font-style: italic;
-            text-align: center;
-            line-height: 1.6;
-        }
-
-        .field-box label {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 100px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 12px;
-            font-size: 1rem; /* Evita zoom automático no iOS */
-            resize: vertical;
-            font-family: var(--font-sans);
-            background-color: #fafafa;
-            -webkit-appearance: none;
-        }
-
-        .body-column {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .gender-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 8px;
-        }
-
-        .btn-gender {
-            flex: 1;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: 2px solid var(--border);
-            cursor: pointer;
-            background: white;
-        }
-
-        .btn-female.active { background-color: var(--btn-female); border-color: #d1c7b7; }
-        .btn-male.active { background-color: var(--btn-male); border-color: #c9c2b2; }
-
-        .canvas-container {
+        /* Canvas Container */
+        .canvas-wrapper {
             position: relative;
-            width: 320px;
-            height: 580px;
-            border: 2px solid var(--secondary);
-            border-radius: 1.5rem;
-            background-color: #ffffff;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            margin-top: 15px;
-            overflow: hidden;
-            touch-action: manipulation;
-        }
-
-        @media (max-width: 350px) {
-            .canvas-container { width: 290px; height: 520px; }
-        }
-
-        .body-silhouette {
             width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
-            padding: 20px;
-            user-select: none;
+            max-width: 320px;
+            height: 580px;
+            margin: 0 auto;
+            border-radius: 24px;
+            border: 2px solid #d8c3ae;
+            background: white;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
         }
 
-        .marker {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: var(--accent-red);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 3px solid white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
+        /* Custom Scrollbar for Textareas */
+        textarea::-webkit-scrollbar {
+            width: 6px;
         }
-
-        .actions {
-            position: sticky;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            border-top: 1px solid var(--border);
-            z-index: 1000;
-            margin: 2rem -15px -15px -15px;
+        textarea::-webkit-scrollbar-thumb {
+            background-color: #d8c3ae;
+            border-radius: 4px;
         }
-
-        .action-btn {
-            flex: 1;
-            min-width: 140px;
-            padding: 1.1rem;
-            border-radius: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-            transition: 0.2s;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn-save { background: var(--primary-dark); color: white; }
-        .btn-whatsapp { background: var(--whatsapp-color); color: white; }
-
-        .readonly textarea { border: none; background: transparent; pointer-events: none; height: auto; min-height: 40px; padding: 5px 0; color: #1a202c; }
-        .readonly .no-print, .readonly .actions { display: none !important; }
-        .readonly .canvas-container { border: 1px solid #eee; box-shadow: none; pointer-events: none; }
-        .readonly .marker { border: 2px solid white; box-shadow: none; }
     </style>
 </head>
-<body>
+<body class="text-textMain font-sans antialiased min-h-screen flex flex-col">
 
-<div class="container" id="main-content">
-    <header>
-        <div class="professional-header">
-            <div class="professional-name">Andrêssa Nobre Alves</div>
-            <div class="professional-crp">Psicóloga | CRP: 11/23627</div>
-        </div>
-        
-        <div class="onboarding-guide no-print">
-            <h2>Passo a passo para preenchimento:</h2>
-            <ul class="onboarding-steps">
-                <li><span class="step-num">1</span> <div>Preencha seu nome e a data.</div></li>
-                <li><span class="step-num">2</span> <div>Descreva sua percepção atual (coluna esquerda) e ideal (coluna direita).</div></li>
-                <li><span class="step-num">3</span> <div><b>Toque na silhueta</b> para marcar pontos de desconforto ou atenção.</div></li>
-                <li><span class="step-num">4</span> <div>Ao terminar, use o botão verde para me enviar e salvar o arquivo.</div></li>
-            </ul>
-        </div>
-
-        <div class="patient-info-header">
-            <div class="input-field">
-                <label>Paciente</label>
-                <input type="text" id="patientName" placeholder="Seu nome">
+    <!-- Header -->
+    <header class="w-full glass-panel sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <h1 class="font-serif text-3xl text-primary font-bold tracking-wide">Andrêssa Nobre Alves</h1>
+                <p class="text-xs font-bold text-secondary tracking-[0.2em] uppercase">Psicóloga | CRP: 11/23627</p>
             </div>
-            <div class="input-field">
-                <label>Data</label>
-                <input type="date" id="dateInput">
-            </div>
+            
+            <!-- Navigation -->
+            <nav class="flex gap-6 text-sm uppercase tracking-wider">
+                <button onclick="switchTab('intro')" id="nav-intro" class="tab-active pb-2 transition-all">Guia</button>
+                <button onclick="switchTab('map')" id="nav-map" class="tab-inactive pb-2 transition-all">Vivência</button>
+                <button onclick="switchTab('insights')" id="nav-insights" class="tab-inactive pb-2 transition-all">Reflexão</button>
+            </nav>
         </div>
-
-        <h1>Mapa de Autopercepção Corporal</h1>
     </header>
 
-    <div class="workspace">
-        <section class="input-group">
-            <div class="column-header">PERCEPÇÃO REAL ATUAL</div>
-            <p class="column-sub-instruction">Como você descreve suas formas hoje?</p>
-            <div class="field-box"><label>Rosto e Cabeça</label><textarea id="t1"></textarea></div>
-            <div class="field-box"><label>Ombros e Tronco</label><textarea id="t2"></textarea></div>
-            <div class="field-box"><label>Abdômen</label><textarea id="t3"></textarea></div>
-            <div class="field-box"><label>Braços e Mãos</label><textarea id="t4"></textarea></div>
-            <div class="field-box"><label>Quadril e Coxas</label><textarea id="t5"></textarea></div>
-            <div class="field-box"><label>Pernas e Pés</label><textarea id="t6"></textarea></div>
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-6xl mx-auto w-full p-4 md:p-8">
+
+        <!-- VIEW 1: INTRO & GUIDE (The "Understanding" Phase) -->
+        <section id="view-intro" class="animate-fade-in space-y-8">
+            
+            <!-- Hero Card -->
+            <div class="glass-panel p-8 rounded-2xl text-center space-y-4 border-l-4 border-accent">
+                <h2 class="font-serif text-4xl text-primary mb-2">Guia de Autopercepção Corporal</h2>
+                <p class="text-lg text-textMuted max-w-2xl mx-auto font-light leading-relaxed">
+                    Este não é um teste de precisão. É uma <b>ponte visual</b> entre o que você sente internamente e como habita sua imagem externa. Vamos identificar onde a percepção encontra o desejo de bem-estar.
+                </p>
+                <button onclick="switchTab('map')" class="mt-6 bg-accent text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-primary transition-colors transform hover:-translate-y-1">
+                    Iniciar Vivência
+                </button>
+            </div>
+
+            <!-- Preparation Grid -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Step 1: Prep -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-secondary/20">
+                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary text-xl">🌿</div>
+                    <h3 class="font-serif text-2xl text-primary mb-2">Preparando o Ambiente</h3>
+                    <ul class="space-y-3 text-sm text-textMuted">
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent text-lg">•</span>
+                            <span><b>Pausa:</b> Reserve 15 minutos sem pressa.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent text-lg">•</span>
+                            <span><b>Conexão:</b> Antes de começar, feche os olhos e faça 3 respirações profundas.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent text-lg">•</span>
+                            <span><b>Escaneamento:</b> Sinta seu corpo do topo da cabeça à ponta dos pés.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Step 2: Mental Set -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-secondary/20">
+                    <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center mb-4 text-secondary text-xl">✨</div>
+                    <h3 class="font-serif text-2xl text-primary mb-2">Dicas de Ouro</h3>
+                    <ul class="space-y-3 text-sm text-textMuted">
+                        <li class="flex items-start gap-2">
+                            <span class="text-secondary text-lg">♥</span>
+                            <span><b>Sem Julgamentos:</b> Use termos como "apertado", "leve", "pesado" em vez de críticas.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-secondary text-lg">♥</span>
+                            <span><b>Dinâmica:</b> Se hoje sente de um jeito e amanhã de outro, tudo bem. O corpo muda.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-secondary text-lg">♥</span>
+                            <span><b>Segurança:</b> Este é um espaço protegido pelo sigilo profissional.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
-        <section class="body-column">
-            <div class="gender-selector-container no-print">
-                <div class="gender-buttons">
-                    <button class="btn-gender btn-female active" onclick="changeGender('female', this)">Feminino</button>
-                    <button class="btn-gender btn-male" onclick="changeGender('male', this)">Masculino</button>
+        <!-- VIEW 2: THE MAP (The Interactive Tool) -->
+        <section id="view-map" class="hidden space-y-6">
+            
+            <!-- Patient ID Bar -->
+            <div class="glass-panel p-4 rounded-xl flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div class="flex-grow w-full md:w-auto">
+                    <label class="block text-xs font-bold text-primary uppercase mb-1">Seu Nome</label>
+                    <input type="text" id="patientName" placeholder="Como prefere ser chamado(a)?" class="w-full bg-transparent border-b-2 border-secondary focus:border-primary outline-none py-1 text-lg">
+                </div>
+                <div class="w-full md:w-48">
+                    <label class="block text-xs font-bold text-primary uppercase mb-1">Data</label>
+                    <input type="date" id="dateInput" class="w-full bg-transparent border-b-2 border-secondary outline-none py-1">
                 </div>
             </div>
 
-            <div class="canvas-container" id="canvas">
-                <img id="bodyImage" src="https://img.freepik.com/vetores-premium/ilustracao-em-vetor-silhueta-corpo-feminino_681458-122.jpg" class="body-silhouette">
+            <!-- The Work Area -->
+            <div class="grid lg:grid-cols-[1fr_340px_1fr] gap-8 items-start">
+                
+                <!-- Left: Current Perception -->
+                <div class="space-y-4">
+                    <div class="bg-primary text-white p-3 rounded-lg text-center shadow-md">
+                        <h3 class="font-bold text-sm tracking-wide">PERCEPÇÃO REAL ATUAL</h3>
+                        <p class="text-xs opacity-90 font-light italic mt-1">"O que o espelho e o toque dizem hoje?"</p>
+                    </div>
+                    
+                    <!-- Dynamic Input Fields -->
+                    <div class="space-y-3" id="current-inputs">
+                        <!-- JS generated fields -->
+                    </div>
+                </div>
+
+                <!-- Center: Body Canvas -->
+                <div class="flex flex-col items-center sticky top-24">
+                    <div class="bg-white p-1 rounded-lg border border-secondary mb-2 flex gap-2">
+                        <button onclick="setGender('female')" class="px-3 py-1 text-xs font-bold rounded hover:bg-secondary/20 transition-colors uppercase text-primary">Feminino</button>
+                        <button onclick="setGender('male')" class="px-3 py-1 text-xs font-bold rounded hover:bg-secondary/20 transition-colors uppercase text-primary">Masculino</button>
+                    </div>
+                    
+                    <div class="canvas-wrapper relative cursor-crosshair group" id="canvas-container">
+                        <img id="bodyImage" src="https://img.freepik.com/vetores-premium/ilustracao-em-vetor-silhueta-corpo-feminino_681458-122.jpg" class="w-full h-full object-contain p-4 opacity-90 transition-opacity duration-500">
+                        <!-- Markers go here -->
+                        <canvas id="drawingCanvas" class="absolute top-0 left-0 w-full h-full z-10 pointer-events-none"></canvas>
+                        <div id="markers-layer" class="absolute top-0 left-0 w-full h-full z-20"></div>
+                        
+                        <!-- Hover Instruction -->
+                        <div class="absolute bottom-4 left-0 w-full text-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="bg-white/80 px-2 py-1 rounded text-xs text-primary shadow-sm">Toque para marcar tensão</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-textMuted mt-2 italic text-center max-w-[250px]">Toque na silhueta para marcar pontos de conflito, dor ou atenção.</p>
+                </div>
+
+                <!-- Right: Ideal Perception -->
+                <div class="space-y-4">
+                    <div class="bg-secondary text-white p-3 rounded-lg text-center shadow-md">
+                        <h3 class="font-bold text-sm tracking-wide">PERCEPÇÃO DO IDEAL</h3>
+                        <p class="text-xs opacity-90 font-light italic mt-1">"Como gostaria de se sentir leve?"</p>
+                    </div>
+
+                    <!-- Dynamic Input Fields -->
+                    <div class="space-y-3" id="ideal-inputs">
+                        <!-- JS generated fields -->
+                    </div>
+                </div>
             </div>
-            <p class="instructions no-print" style="margin-top:10px; font-size: 0.75rem; text-align: center; color: var(--text-muted); padding: 0 20px;">
-                <b>Toque na silhueta</b> para marcar áreas.<br>Toque em um (X) para removê-lo.
-            </p>
+
+            <!-- Action Bar -->
+            <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-secondary/30 flex justify-center gap-3 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+                <button onclick="clearMap()" class="px-6 py-2 rounded-xl text-xs font-bold text-textMuted bg-gray-100 hover:bg-gray-200 transition-colors">
+                    LIMPAR
+                </button>
+                <button onclick="switchTab('insights')" class="px-6 py-2 rounded-xl text-xs font-bold text-white bg-primary hover:bg-opacity-90 transition-colors shadow-lg">
+                    VER ANÁLISE
+                </button>
+                <button onclick="sendToWhatsapp()" class="px-6 py-2 rounded-xl text-xs font-bold text-white bg-[#25d366] hover:bg-opacity-90 transition-colors shadow-lg flex items-center gap-2">
+                    <span>ENVIAR P/ PSI</span>
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.481 0 1.466 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                </button>
+            </div>
         </section>
 
-        <section class="input-group">
-            <div class="column-header">PERCEPÇÃO DO IDEAL</div>
-            <p class="column-sub-instruction">Como seriam seus contornos ideais?</p>
-            <div class="field-box"><label>Rosto e Cabeça</label><textarea id="t7"></textarea></div>
-            <div class="field-box"><label>Ombros e Tronco</label><textarea id="t8"></textarea></div>
-            <div class="field-box"><label>Abdômen</label><textarea id="t9"></textarea></div>
-            <div class="field-box"><label>Braços e Mãos</label><textarea id="t10"></textarea></div>
-            <div class="field-box"><label>Quadril e Coxas</label><textarea id="t11"></textarea></div>
-            <div class="field-box"><label>Pernas e Pés</label><textarea id="t12"></textarea></div>
+        <!-- VIEW 3: INSIGHTS & REFLECTION (Chart.js Visualization) -->
+        <section id="view-insights" class="hidden animate-fade-in pb-20">
+            <div class="glass-panel p-6 rounded-2xl mb-8">
+                <h2 class="font-serif text-3xl text-primary mb-4 text-center">Reflexão da Vivência</h2>
+                <p class="text-textMuted text-center text-sm mb-8 max-w-lg mx-auto">
+                    Abaixo você pode visualizar onde sua atenção está mais concentrada hoje. Observe se há um equilíbrio entre o que você sente (Atual) e o que você deseja (Ideal).
+                </p>
+
+                <!-- Chart Container -->
+                <div class="bg-white p-4 rounded-xl border border-secondary/20 shadow-sm h-[300px] w-full max-w-2xl mx-auto relative">
+                    <canvas id="reflectionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-primary/5 p-6 rounded-xl border border-primary/20 text-center">
+                <h3 class="font-serif text-xl text-primary mb-2">Próximos Passos</h3>
+                <p class="text-sm text-textMuted mb-4">
+                    Ao observar este mapa, que emoção surge? Alívio? Surpresa? 
+                    <br>Leve estas percepções para nossa próxima sessão.
+                </p>
+            </div>
         </section>
-    </div>
 
-    <div class="actions no-print">
-        <button class="action-btn btn-clear" style="background:#f1f1f1; color:#666;" onclick="clearMarkers()">Limpar</button>
-        <button class="action-btn btn-save" onclick="downloadHtml()">Salvar Arquivo</button>
-        <button class="action-btn btn-whatsapp" onclick="generateAndSend()">Enviar p/ Andrêssa</button>
-    </div>
-</div>
+    </main>
 
-<script>
-    const canvas = document.getElementById('canvas');
-    const bodyImage = document.getElementById('bodyImage');
-    const images = {
-        female: "https://img.freepik.com/vetores-premium/ilustracao-em-vetor-silhueta-corpo-feminino_681458-122.jpg",
-        male: "https://img.freepik.com/vetores-premium/silhueta-de-uma-figura-humana-em-pe_53876-410810.jpg?semt=ais_hybrid&w=740&q=80"
-    };
-
-    function changeGender(gender, btn) {
-        if (confirm("Isso limpará as marcas atuais. Continuar?")) {
-            bodyImage.src = images[gender];
-            document.querySelectorAll('.marker').forEach(m => m.remove());
-            document.querySelectorAll('.btn-gender').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
-    }
-
-    // Suporte a toque e clique
-    function handleInteraction(e) {
-        if (document.body.classList.contains('readonly')) return;
-        if (e.target.classList.contains('marker')) return;
-        
-        const rect = canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        
-        const x = ((clientX - rect.left) / rect.width) * 100;
-        const y = ((clientY - rect.top) / rect.height) * 100;
-        
-        if (x >= 0 && x <= 100 && y >= 0 && y <= 100) {
-            addMarker(x, y);
-        }
-    }
-
-    canvas.addEventListener('click', handleInteraction);
-
-    function addMarker(x, y) {
-        const marker = document.createElement('div');
-        marker.className = 'marker';
-        marker.innerHTML = '✕';
-        marker.style.left = x + '%';
-        marker.style.top = y + '%';
-        marker.onclick = (ev) => { 
-            ev.stopPropagation(); 
-            if(!document.body.classList.contains('readonly')) marker.remove(); 
+    <script>
+        // --- DATA & STATE ---
+        const state = {
+            gender: 'female',
+            markers: [], // {x: %, y: %}
+            texts: {} // id: string
         };
-        canvas.appendChild(marker);
-    }
 
-    function clearMarkers() {
-        if(confirm("Deseja apagar todo o preenchimento?")) {
-            document.querySelectorAll('.marker').forEach(m => m.remove());
-            document.querySelectorAll('textarea').forEach(t => t.value = "");
+        const images = {
+            female: "https://img.freepik.com/vetores-premium/ilustracao-em-vetor-silhueta-corpo-feminino_681458-122.jpg",
+            male: "https://img.freepik.com/vetores-premium/silhueta-de-uma-figura-humana-em-pe_53876-410810.jpg?semt=ais_hybrid&w=740&q=80"
+        };
+
+        const bodyParts = [
+            { id: 't1', label: 'Cabeça / Rosto', yMin: 0, yMax: 15 },
+            { id: 't2', label: 'Pescoço / Ombros', yMin: 15, yMax: 25 },
+            { id: 't3', label: 'Tronco / Abdômen', yMin: 25, yMax: 45 },
+            { id: 't4', label: 'Braços / Mãos', yMin: 20, yMax: 50 }, // Side approximation
+            { id: 't5', label: 'Quadril / Coxas', yMin: 45, yMax: 65 },
+            { id: 't6', label: 'Pernas / Pés', yMin: 65, yMax: 100 }
+        ];
+
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderInputs();
+            document.getElementById('dateInput').valueAsDate = new Date();
+            initChart();
+        });
+
+        // --- NAVIGATION ---
+        function switchTab(tabId) {
+            // UI Update
+            ['intro', 'map', 'insights'].forEach(t => {
+                document.getElementById(`view-${t}`).classList.add('hidden');
+                document.getElementById(`nav-${t}`).className = 'tab-inactive pb-2 transition-all';
+            });
+            
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            document.getElementById(`nav-${tabId}`).className = 'tab-active pb-2 transition-all';
+
+            // Special actions
+            if (tabId === 'insights') updateChart();
         }
-    }
 
-    function getHtmlFileContent() {
-        const patientName = document.getElementById('patientName').value || "Paciente";
-        const dateValue = document.getElementById('dateInput').value;
-        let docClone = document.documentElement.cloneNode(true);
+        // --- INPUT RENDERING ---
+        function renderInputs() {
+            const createField = (part, prefix, placeholder) => `
+                <div class="field-box group">
+                    <label class="group-focus-within:text-accent transition-colors">${part.label}</label>
+                    <textarea 
+                        id="${prefix}-${part.id}" 
+                        placeholder="${placeholder}"
+                        oninput="saveText('${prefix}-${part.id}')"
+                    ></textarea>
+                </div>
+            `;
+
+            const currentHTML = bodyParts.map(p => createField(p, 'curr', 'Descreva o formato, volume, sensação...')).join('');
+            const idealHTML = bodyParts.map(p => createField(p, 'ideal', 'Como seria o contorno de paz?')).join('');
+
+            document.getElementById('current-inputs').innerHTML = currentHTML;
+            document.getElementById('ideal-inputs').innerHTML = idealHTML;
+        }
+
+        function saveText(id) {
+            state.texts[id] = document.getElementById(id).value;
+        }
+
+        // --- BODY MAP LOGIC ---
+        function setGender(g) {
+            if(state.markers.length > 0 && !confirm("Mudar a silhueta apagará as marcas. Continuar?")) return;
+            
+            state.gender = g;
+            state.markers = [];
+            document.getElementById('bodyImage').src = images[g];
+            renderMarkers();
+        }
+
+        const canvasContainer = document.getElementById('canvas-container');
         
-        // Sincroniza dados para o arquivo final
-        docClone.querySelector('#patientName').setAttribute('value', patientName);
-        docClone.querySelector('#dateInput').setAttribute('value', dateValue);
-        
-        const textareas = document.querySelectorAll('textarea');
-        const cloneTAs = docClone.querySelectorAll('textarea');
-        textareas.forEach((ta, i) => { 
-            cloneTAs[i].textContent = ta.value; 
-            cloneTAs[i].setAttribute('readonly', 'true');
+        canvasContainer.addEventListener('click', (e) => {
+            // Prevent marking if clicking on existing marker
+            if(e.target.classList.contains('marker')) return;
+
+            const rect = canvasContainer.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+            // Boundary check
+            if(x >= 0 && x <= 100 && y >= 0 && y <= 100) {
+                state.markers.push({x, y});
+                renderMarkers();
+            }
         });
 
-        // Adiciona marcas persistentes no clone
-        const markers = document.querySelectorAll('.marker');
-        const cloneCanvas = docClone.querySelector('#canvas');
-        cloneCanvas.innerHTML = ''; // Limpa e reconstrói
-        cloneCanvas.appendChild(docClone.querySelector('#bodyImage'));
-        markers.forEach(m => {
-            const mClone = m.cloneNode(true);
-            mClone.style.left = m.style.left;
-            mClone.style.top = m.style.top;
-            cloneCanvas.appendChild(mClone);
-        });
+        function renderMarkers() {
+            const layer = document.getElementById('markers-layer');
+            layer.innerHTML = '';
+            
+            state.markers.forEach((m, index) => {
+                const el = document.createElement('div');
+                el.className = 'absolute w-6 h-6 bg-alert border-2 border-white rounded-full flex items-center justify-center text-white text-xs font-bold cursor-pointer shadow-md transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition-transform marker';
+                el.style.left = `${m.x}%`;
+                el.style.top = `${m.y}%`;
+                el.innerHTML = '✕';
+                el.onclick = (e) => {
+                    e.stopPropagation();
+                    state.markers.splice(index, 1);
+                    renderMarkers();
+                };
+                layer.appendChild(el);
+            });
+        }
 
-        docClone.querySelector('body').classList.add('readonly');
-        
-        // Adiciona um script de auto-ajuste para mobile no arquivo final
-        const finalScript = docClone.createElement('script');
-        finalScript.textContent = "window.onload = function() { console.log('Mapa carregado em modo leitura.'); };";
-        docClone.body.appendChild(finalScript);
+        function clearMap() {
+            if(confirm("Deseja limpar todo o mapa e textos?")) {
+                state.markers = [];
+                renderMarkers();
+                document.querySelectorAll('textarea').forEach(t => t.value = '');
+                state.texts = {};
+            }
+        }
 
-        return "<!DOCTYPE html>\n" + docClone.outerHTML;
-    }
+        // --- CHART.JS VISUALIZATION ---
+        let myChart = null;
 
-    function downloadHtml() {
-        const name = document.getElementById('patientName').value || "Paciente";
-        const content = getHtmlFileContent();
-        const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
-        const a = document.createElement('a');
-        const fileName = `Mapa_Corporal_${name.replace(/\s+/g, '_')}.html`;
-        
-        a.href = URL.createObjectURL(blob);
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        return fileName;
-    }
+        function initChart() {
+            const ctx = document.getElementById('reflectionChart').getContext('2d');
+            
+            // Custom plugin to draw background image behind chart if needed, 
+            // but simple bar chart is better here.
+            
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: bodyParts.map(p => p.label),
+                    datasets: [
+                        {
+                            label: 'Pontos de Tensão (Marcas)',
+                            data: [0,0,0,0,0,0],
+                            backgroundColor: '#e53e3e',
+                            borderRadius: 6,
+                        },
+                        {
+                            label: 'Intensidade do Relato (Caracteres)',
+                            data: [0,0,0,0,0,0],
+                            backgroundColor: '#7a8f82',
+                            borderRadius: 6,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { display: false },
+                            display: false // Hide axis numbers for cleaner look
+                        },
+                        y1: {
+                            display: false,
+                            position: 'right',
+                            grid: { display: false }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'Montserrat', sans-serif", size: 10 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { family: "'Montserrat', sans-serif" } } },
+                        tooltip: {
+                            backgroundColor: 'rgba(255,255,255,0.9)',
+                            titleColor: '#2d3748',
+                            bodyColor: '#718096',
+                            borderColor: '#d8c3ae',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
-    function generateAndSend() {
-        const patientName = document.getElementById('patientName').value || "Paciente";
-        const phone = "5585992844168";
-        const fileName = downloadHtml();
-        
-        const message = encodeURIComponent(
-            `Olá, Andrêssa Nobre! 🌿\n\nSou ${patientName}. Concluí meu Mapa de Autopercepção Corporal.\n\n✅ *O ARQUIVO ESTÁ PRONTO:* O arquivo "${fileName}" já está na pasta de downloads do meu celular.\n\n📍 *COMO VOU TE ENVIAR:* \n1. Vou voltar para nossa conversa.\n2. Clicar no 📎 (Anexo) > Documento.\n3. Selecionar este arquivo e te enviar.`
-        );
-        
-        setTimeout(() => { 
-            window.location.href = `https://wa.me/${phone}?text=${message}`;
-        }, 1500);
-    }
+        function updateChart() {
+            // Count markers per region based on Y coordinate
+            const markerCounts = [0, 0, 0, 0, 0, 0];
+            state.markers.forEach(m => {
+                const y = m.y;
+                // Simple logic: mapping markers roughly to body parts based on Y %
+                // Head: 0-15, Neck: 15-25, Torso: 25-45, Arms: check X, but simplify to Y for now or mainly Torso/Arms overlap
+                // Let's iterate bodyParts config
+                bodyParts.forEach((part, idx) => {
+                    if(y >= part.yMin && y < part.yMax) {
+                        markerCounts[idx]++;
+                    }
+                });
+            });
 
-    document.getElementById('dateInput').valueAsDate = new Date();
-</script>
+            // Count text length (intensity of description)
+            const textCounts = bodyParts.map(p => {
+                const currLen = (document.getElementById(`curr-${p.id}`)?.value || '').length;
+                const idealLen = (document.getElementById(`ideal-${p.id}`)?.value || '').length;
+                return Math.min((currLen + idealLen) / 10, 10); // Scale down for visual balance
+            });
 
+            myChart.data.datasets[0].data = markerCounts;
+            myChart.data.datasets[1].data = textCounts;
+            myChart.update();
+        }
+
+        // --- EXPORT & SEND ---
+        function getHtmlContent() {
+            // Clone document to make a readonly version
+            const docClone = document.documentElement.cloneNode(true);
+            
+            // Fix inputs
+            const name = document.getElementById('patientName').value;
+            const date = document.getElementById('dateInput').value;
+            docClone.querySelector('#patientName').setAttribute('value', name);
+            docClone.querySelector('#dateInput').setAttribute('value', date);
+            
+            // Fix Textareas
+            const areas = document.querySelectorAll('textarea');
+            const cloneAreas = docClone.querySelectorAll('textarea');
+            areas.forEach((a, i) => {
+                cloneAreas[i].innerHTML = a.value; // Store value in HTML
+                cloneAreas[i].setAttribute('readonly', true);
+            });
+
+            // Fix Markers (Inject them into HTML permanently)
+            const markerLayer = docClone.querySelector('#markers-layer');
+            markerLayer.innerHTML = ''; // Clear events
+            state.markers.forEach(m => {
+                const el = document.createElement('div');
+                el.className = 'absolute w-6 h-6 bg-alert border-2 border-white rounded-full flex items-center justify-center text-white text-xs font-bold transform -translate-x-1/2 -translate-y-1/2';
+                el.style.left = `${m.x}%`;
+                el.style.top = `${m.y}%`;
+                el.innerHTML = '✕';
+                markerLayer.appendChild(el);
+            });
+
+            // Ensure correct image
+            docClone.querySelector('#bodyImage').src = state.gender === 'female' ? images.female : images.male;
+
+            // Clean up UI for Readonly
+            docClone.querySelectorAll('.no-print').forEach(el => el.remove()); // Remove buttons
+            docClone.querySelector('#view-intro').remove(); // Remove Intro
+            docClone.querySelector('#view-insights').remove(); // Remove Chart section (optional, keeping clean)
+            docClone.querySelector('#view-map').classList.remove('hidden'); // Ensure map is visible
+            
+            // Add Readonly styles
+            const style = document.createElement('style');
+            style.innerHTML = `
+                textarea { border: none; background: transparent; resize: none; overflow: hidden; height: auto; font-weight: 500; color: #000; }
+                input { border: none; font-weight: bold; color: #000; }
+                .glass-panel { box-shadow: none; border: none; }
+                body { padding: 20px; background-image: none; background-color: #fff; }
+                .canvas-wrapper { border: 1px solid #ccc; box-shadow: none; }
+            `;
+            docClone.querySelector('head').appendChild(style);
+
+            return "<!DOCTYPE html>" + docClone.outerHTML;
+        }
+
+        function downloadHtml() {
+            const name = document.getElementById('patientName').value || "Paciente";
+            const htmlContent = getHtmlContent();
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Mapa_Corporal_${name.replace(/\s+/g, '_')}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            return a.download;
+        }
+
+        function sendToWhatsapp() {
+            const name = document.getElementById('patientName').value || "Paciente";
+            const filename = downloadHtml();
+            
+            const phone = "5585992844168";
+            const text = encodeURIComponent(
+                `Olá, Andrêssa Nobre! 🌿\n\nSou ${name}. Concluí meu Mapa de Autopercepção Corporal.\n\n✅ O arquivo "${filename}" já foi salvo no meu celular/computador.\n\n📍 Estou enviando ele em anexo agora (clicando no clipe 📎 > Documento).`
+            );
+            
+            // Small delay to allow download to start
+            setTimeout(() => {
+                window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
